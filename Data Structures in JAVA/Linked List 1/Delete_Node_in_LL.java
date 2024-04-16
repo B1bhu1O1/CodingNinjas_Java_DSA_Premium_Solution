@@ -67,26 +67,30 @@ Sample Output 2 :
 *****************************************************************/
 
 public class Solution {
-	public static LinkedListNode<Integer> deleteNode(LinkedListNode<Integer> head, int i) {
-		// Write your code here.
-        
-         if(head==null )
-            return head;
-        if(i==0)
-            return head.next;
-        int count=0;
-        LinkedListNode<Integer> temp=head;
-        while(temp!=null && count<i-1)
-        {
-            temp=temp.next;
-            count++;
+    public static Node<Integer> deleteNode(Node<Integer> head, int pos) {
+        if (head == null) {
+            return null; // If the list is empty, nothing to delete
         }
-        if(temp==null)
+        
+        if (pos == 0) {
+            return head.next; // If the position is 0, delete the head node
+        }
+        
+        int i = 0;
+        Node<Integer> temp = head;
+        while (temp != null && i < pos - 1) {
+            temp = temp.next;
+            i++;
+        }
+        
+        // If temp is null or temp.next is null, it means the position is out of bounds
+        if (temp == null || temp.next == null) {
             return head;
-        if(temp.next!=null)
-            temp.next=temp.next.next;
-         
+        }
+        
+        // Update the link to skip the node at position 'pos'
+        temp.next = temp.next.next;
         
         return head;
-	}
+    }
 }
